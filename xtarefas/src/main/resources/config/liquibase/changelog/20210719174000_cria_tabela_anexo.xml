@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet id="20210719174000-0" author="andriws.silva">
+        <createTable tableName="TB_ANEXO">
+            <column name="CDN_ANEXO" type="bigint" remarks="Campo destinado ao código númerico da tabela anexo" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="ANEXO_PK"/>
+            </column>
+
+            <column name="NOM_ANEXO" type="varchar(255)" remarks="Campo destinado ao nome do anexo">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="OBJ_ANEXO" type="text" remarks="Campo destinado ao anexo da tabela">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="20210719174000-1" author="andriws.silva">
+        <createSequence incrementBy="1" sequenceName="SEQ_ANEXO" startValue="1"/>
+    </changeSet>
+</databaseChangeLog>

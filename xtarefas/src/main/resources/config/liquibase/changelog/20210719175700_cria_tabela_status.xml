@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet id="20210719175700-0" author="andriws.silva">
+        <createTable tableName="TB_STATUS">
+            <column name="CDN_STATUS" type="bigint" remarks="Campo destinado ao código númerico do status">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="STATUS_PK"/>
+            </column>
+
+            <column name="DES_STATUS" type="varchar(50)" remarks="Campo destinado à descrição do status">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="20210719180200-1" author="andriws.silva">
+        <sql>
+            INSERT INTO TB_STATUS (CDN_STATUS, DES_STATUS)
+            VALUES (1, 'AGUARDANDO ATRIBUICAO')
+        </sql>
+        <sql>
+            INSERT INTO TB_STATUS (CDN_STATUS, DES_STATUS)
+            VALUES (2, 'EM ANDAMENTO')
+        </sql>
+        <sql>
+            INSERT INTO TB_STATUS (CDN_STATUS, DES_STATUS)
+            VALUES (3, 'SUSPENSO')
+        </sql>
+        <sql>
+            INSERT INTO TB_STATUS (CDN_STATUS, DES_STATUS)
+            VALUES (4, 'ATRIBUIDA P/ RESPONSAVEL')
+        </sql>
+        <sql>
+            INSERT INTO TB_STATUS (CDN_STATUS, DES_STATUS)
+            VALUES (5, 'CONCLUIDA')
+        </sql>
+    </changeSet>
+</databaseChangeLog>

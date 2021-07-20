@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet id="20210719174600-0" author="andriws.silva">
+        <createTable tableName="TB_TAREFA">
+            <column name="CDN_TAREFA" type="bigint" remarks="Campo destinado ao código númerico destinado à tarefa" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TAREFA_PK"/>
+            </column>
+
+            <column name="NOM_TAREFA" type="varchar(255)" remarks="Campo destinado ao nome da tarefa">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="DT_CONCLUSAO" type="date" remarks="Campo destinado à data de conclusão da tarefa">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="DT_INICIO" type="date" remarks="Campo destinado à data de inicio da tarefa">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="CDN_STATUS" type="bigint" remarks="Campo destinado ao status da tarefa">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="20210719174600-1" author="andriws.silva">
+        <createSequence incrementBy="1" sequenceName="SEQ_TAREFA" startValue="1"/>
+    </changeSet>
+
+    <changeSet id="20210719174600-4" author="andriws.silva">
+        <addForeignKeyConstraint baseTableName="TB_TAREFA" baseColumnNames="CDN_STATUS"
+                                 constraintName="TAREFA_STATUS_FK" referencedTableName="TB_STATUS"
+                                 referencedColumnNames="CDN_STATUS"/>
+    </changeSet>
+</databaseChangeLog>
