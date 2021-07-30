@@ -5,6 +5,7 @@ import com.basis.campina.xtarefas.service.dto.AnexoDTO;
 import io.micrometer.core.annotation.Timed;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,14 +30,15 @@ public class AnexoResource {
     public ResponseEntity<Void> salvar(@RequestBody @Valid AnexoDTO dto) {
         log.debug("Requisição REST para salvar uma Tarefa: {}", dto);
         service.salvar(dto);
-        return ResponseEntity.ok().build();
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     @Timed
-    public ResponseEntity<Void> editar(@RequestBody @Valid AnexoDTO dto){
+    public ResponseEntity<Void> editar(@PathVariable Long id, @RequestBody @Valid AnexoDTO dto){
         log.debug("Requisição REST para editar uma Tarefa: {}", dto);
         service.salvar(dto);
+        dto.setId(id);
         return ResponseEntity.ok().build();
     }
 
@@ -60,5 +62,11 @@ public class AnexoResource {
         log.debug("Requisiçao REST para deletar uma Tarefa: {}", id);
         service.deletar(id);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/document")
+    @Timed
+    public ResponseEntity<String> getString() {
+        return ResponseEntity.ok(service.getString());
     }
 }

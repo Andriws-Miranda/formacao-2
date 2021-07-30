@@ -6,15 +6,15 @@
 
     <changeSet id="20210719174000-0" author="andriws.silva">
         <createTable tableName="TB_ANEXO">
-            <column name="CDN_ANEXO" type="bigint" remarks="Campo destinado ao código númerico da tabela anexo" autoIncrement="true">
+            <column name="ID" type="bigint" remarks="Campo destinado ao código númerico da tabela anexo">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="ANEXO_PK"/>
             </column>
 
-            <column name="NOM_ANEXO" type="varchar(255)" remarks="Campo destinado ao nome do anexo">
+            <column name="NOME" type="varchar(255)" remarks="Campo destinado ao nome do anexo">
                 <constraints nullable="false"/>
             </column>
 
-            <column name="OBJ_ANEXO" type="text" remarks="Campo destinado ao anexo da tabela">
+            <column name="OBJETO" type="text" remarks="Campo destinado ao anexo da tabela">
                 <constraints nullable="false"/>
             </column>
         </createTable>

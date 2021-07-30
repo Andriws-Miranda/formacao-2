@@ -3,9 +3,10 @@ package com.basis.campina.xtarefas.service;
 import com.basis.campina.xtarefas.domain.Anexo;
 import com.basis.campina.xtarefas.repository.AnexoRepository;
 import com.basis.campina.xtarefas.service.dto.AnexoDTO;
+import com.basis.campina.xtarefas.service.exception.RegraNegocioException;
+import com.basis.campina.xtarefas.service.feign.DocumentClient;
 import com.basis.campina.xtarefas.service.mapper.AnexoMapper;
 import com.basis.campina.xtarefas.service.util.ConstantesUtil;
-import com.basis.campina.xtarefas.web.rest.error.BadRequestAlertException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,8 @@ public class AnexoService {
     private final AnexoRepository repository;
 
     private final AnexoMapper mapper;
+
+    private final DocumentClient documentClient;
 
     public AnexoDTO salvar(AnexoDTO dto) {
         if(Objects.nonNull(dto.getId())){
@@ -41,12 +44,20 @@ public class AnexoService {
     }
 
     public AnexoDTO obterPorId(Long id) {
-        Anexo anexo = repository.findById(id).orElseThrow(() -> new BadRequestAlertException(ConstantesUtil.ANEXO_INEXISTENTE, ConstantesUtil.ANEXO, ConstantesUtil.ERRO_CHAVE));
+        Anexo anexo = repository.findById(id).orElseThrow(() -> new RegraNegocioException("Não existe nenhuma entidade com esse id"));
         return mapper.toDto(anexo);
     }
 
     public void deletar(Long id) {
         obterPorId(id);
         repository.deleteById(id);
+    }
+
+    public String getString() {
+       return documentClient.getString().getBody();
+    }
+
+    public List<String> getNomeAnexosByTarefaId(Long id) {
+        return repository.getNomeAnexosByTarefaId(id);
     }
 }

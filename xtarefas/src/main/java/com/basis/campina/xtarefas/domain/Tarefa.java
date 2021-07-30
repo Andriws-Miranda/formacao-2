@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import java.io.Serializable;
@@ -24,12 +25,12 @@ import java.util.List;
 @Table(name = "TB_TAREFA")
 public class Tarefa implements Serializable {
     @Id
-    @Column(name = "CDN_TAREFA")
+    @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_TAREFA")
     @SequenceGenerator(name = "SEQ_TAREFA", sequenceName = "SEQ_TAREFA", allocationSize = 1)
     private Long id;
 
-    @Column(name = "NOM_TAREFA")
+    @Column(name = "NOME")
     private String nome;
 
     @Column(name = "DT_INICIO")
@@ -38,15 +39,16 @@ public class Tarefa implements Serializable {
     @Column(name = "DT_CONCLUSAO")
     private LocalDate dataConclusao;
 
-    @Column(name = "TIP_STATUS")
-    private Long status;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "STATUS_ID")
+    private Status status;
 
-    @OneToMany(mappedBy = "anexo", targetEntity = Anexo.class,
-            fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "TAREFA_ID")
     private List<Anexo> anexos;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "CDN_TAREFA_RESPONSAVEL", nullable = false)
+    @JoinColumn(name = "RESPONSAVEL_ID", nullable = false)
     private Responsavel responsavel;
 
 }

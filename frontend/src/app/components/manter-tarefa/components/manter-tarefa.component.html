@@ -1,0 +1,43 @@
+
+<h1>Listar Tarefas</h1>
+<p-table [value]="tarefas.content" #tabela (onLazyLoad)="buscarTarefas(query)" [lazy]="true" dataKey="id"
+[rowHover]="true" [rows]="10"
+currentPageReportTemplate="Showing {first} to {{tarefas.numberOfElements}} of {totalRecords} entries"
+[showCurrentPageReport]="true" [paginator]="true" [totalRecords]="tarefas.totalElements"
+styleClass="p-datatable-responsive-demo">
+<ng-template pTemplate="caption">
+    <div class="p-d-flex p-ai-center p-jc-between">
+        <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input pInputText type="text" #input (keydown.enter)="buscarTarefas(input.value)"
+                placeholder="Global Search" />
+        </span>
+    </div>
+</ng-template>
+<ng-template pTemplate="header">
+    <tr>
+        <th pSortableColumn="nome">Nome <p-sortIcon [field]="'nome'"></p-sortIcon>
+        </th>
+        <th pSortableColumn="dataInicio">Data de Inicio <p-sortIcon [field]="'dataInicio'"></p-sortIcon>
+        </th>
+        <th pSortableColumn="dataConclusao">Data de Conclusão <p-sortIcon [field]="'dataConclusao'"></p-sortIcon>
+        </th>
+        <th pSortableColumn="status">Status <p-sortIcon [field]="'status'"></p-sortIcon>
+        </th>
+        <th pSortableColumn="anexos">Nome dos Anexos <p-sortIcon [field]="'anexos'"></p-sortIcon>
+        </th>
+        <th pSortableColumn="responsavel">Responsavel <p-sortIcon [field]="'responsavel'"></p-sortIcon>
+        </th>
+    </tr>
+</ng-template>
+<ng-template pTemplate="body" let-tarefa>
+    <tr>
+        <th>{{tarefa.nome}}</th>
+        <th>{{tarefa.dataInicio}}</th>
+        <th>{{tarefa.dataConclusao}}</th>
+        <th>{{tarefa.status}}</th>
+        <th>{{tarefa.anexos}}</th>
+        <th>{{tarefa.responsavel}}</th>
+    </tr>
+</ng-template>
+</p-table>

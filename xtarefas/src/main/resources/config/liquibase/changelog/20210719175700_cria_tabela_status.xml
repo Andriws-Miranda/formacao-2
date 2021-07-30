@@ -6,11 +6,11 @@
 
     <changeSet id="20210719175700-0" author="andriws.silva">
         <createTable tableName="TB_STATUS">
-            <column name="CDN_STATUS" type="bigint" remarks="Campo destinado ao código númerico do status">
+            <column name="ID" type="bigint" remarks="Campo destinado ao código númerico do status">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="STATUS_PK"/>
             </column>
 
-            <column name="DES_STATUS" type="varchar(50)" remarks="Campo destinado à descrição do status">
+            <column name="DESCRICAO" type="varchar(50)" remarks="Campo destinado à descrição do status">
                 <constraints nullable="false"/>
             </column>
         </createTable>
@@ -18,23 +18,23 @@
 
     <changeSet id="20210719180200-1" author="andriws.silva">
         <sql>
-            INSERT INTO TB_STATUS (CDN_STATUS, DES_STATUS)
+            INSERT INTO TB_STATUS (ID, DESCRICAO)
             VALUES (1, 'AGUARDANDO ATRIBUICAO')
         </sql>
         <sql>
-            INSERT INTO TB_STATUS (CDN_STATUS, DES_STATUS)
+            INSERT INTO TB_STATUS (ID, DESCRICAO)
             VALUES (2, 'EM ANDAMENTO')
         </sql>
         <sql>
-            INSERT INTO TB_STATUS (CDN_STATUS, DES_STATUS)
+            INSERT INTO TB_STATUS (ID, DESCRICAO)
             VALUES (3, 'SUSPENSO')
         </sql>
         <sql>
-            INSERT INTO TB_STATUS (CDN_STATUS, DES_STATUS)
+            INSERT INTO TB_STATUS (ID, DESCRICAO)
             VALUES (4, 'ATRIBUIDA P/ RESPONSAVEL')
         </sql>
         <sql>
-            INSERT INTO TB_STATUS (CDN_STATUS, DES_STATUS)
+            INSERT INTO TB_STATUS (ID, DESCRICAO)
             VALUES (5, 'CONCLUIDA')
         </sql>
     </changeSet>

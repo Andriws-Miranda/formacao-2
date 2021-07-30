@@ -6,15 +6,15 @@
 
     <changeSet id="202107119172800-0" author="andriws.silva">
         <createTable tableName="TB_RESPONSAVEL">
-            <column name="CDN_RESPONSAVEL" type="bigint" remarks="Campo destinado ao código númerico referencial para a tabela responsável">
+            <column name="ID" type="bigint" remarks="Campo destinado ao código númerico referencial para a tabela responsável">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="RESPONSAVEL_PK"/>
             </column>
 
-            <column name="NOM_RESPONSAVEL" type="varchar(255)" remarks="Campo destinado ao nome do responsável">
+            <column name="NOME" type="varchar(255)" remarks="Campo destinado ao nome do responsável">
                 <constraints nullable="false"/>
             </column>
 
-            <column name="NOM_EMAIL" type="varchar(255)" remarks="Campo para o email do usuário">
+            <column name="EMAIL" type="varchar(255)" remarks="Campo para o email do usuário">
                 <constraints nullable="false"/>
             </column>
 

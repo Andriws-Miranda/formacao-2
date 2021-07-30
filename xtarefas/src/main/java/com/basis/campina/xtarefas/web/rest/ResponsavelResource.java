@@ -1,10 +1,15 @@
 package com.basis.campina.xtarefas.web.rest;
 
+import com.basis.campina.xtarefas.domain.elastic.ResponsavelDocument;
 import com.basis.campina.xtarefas.service.ResponsavelService;
 import com.basis.campina.xtarefas.service.dto.ResponsavelDTO;
+import com.basis.campina.xtarefas.service.filters.ResponsavelFilter;
 import io.micrometer.core.annotation.Timed;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,13 +34,14 @@ public class ResponsavelResource {
     public ResponseEntity<Void> salvar(@RequestBody @Valid ResponsavelDTO dto) {
         log.debug("Requisição REST para salvar uma Tarefa: {}", dto);
         service.salvar(dto);
-        return ResponseEntity.ok().build();
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     @Timed
-    public ResponseEntity<Void> editar(@RequestBody @Valid ResponsavelDTO dto){
+    public ResponseEntity<Void> editar(@PathVariable Long id ,@RequestBody @Valid ResponsavelDTO dto){
         log.debug("Requisição REST para editar uma Tarefa: {}", dto);
+        dto.setId(id);
         service.salvar(dto);
         return ResponseEntity.ok().build();
     }
@@ -60,5 +66,13 @@ public class ResponsavelResource {
         log.debug("Requisiçao REST para deletar uma Tarefa: {}", id);
         service.deletar(id);
         return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/search")
+    @Timed
+    public ResponseEntity<Page<ResponsavelDocument>> search(@RequestBody ResponsavelFilter responsavelFilter, Pageable pageable){
+        Page<ResponsavelDocument> responsaveis = service.search(responsavelFilter, pageable);
+        log.info("Responsavéis Listados");
+        return new ResponseEntity<>(responsaveis, HttpStatus.OK);
     }
 }

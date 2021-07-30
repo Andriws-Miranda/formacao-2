@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet id="20210720144700-0" author="andriws.silva">
+        <addColumn tableName="TB_TAREFA">
+            <column name="RESPONSAVEL_ID" type="bigint" remarks="Identificador estrangeiro do responsavel">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="20210720144700-1" author="andriws.silva">
+        <addForeignKeyConstraint baseTableName="TB_TAREFA" baseColumnNames="RESPONSAVEL_ID"
+                                 constraintName="FK_TAREFA_RESPONSAVEL" referencedTableName="TB_RESPONSAVEL"
+                                 referencedColumnNames="ID"/>
+    </changeSet>
+
+    <changeSet id="20210720144700-2" author="andriws.silva">
+        <addColumn tableName="TB_ANEXO">
+            <column name="TAREFA_ID" type="bigint" remarks="Identificador estrangeiro para a tarefa">
+            </column>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="20210720144700-3" author="andriws.silva">
+        <addForeignKeyConstraint baseTableName="TB_ANEXO" baseColumnNames="TAREFA_ID"
+                                 constraintName="FK_ANEXO_TAREFA" referencedTableName="TB_TAREFA"
+                                 referencedColumnNames="ID"/>
+    </changeSet>
+
+</databaseChangeLog>

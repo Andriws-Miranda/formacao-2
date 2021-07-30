@@ -19,15 +19,15 @@ import java.time.LocalDate;
 public class Responsavel implements Serializable {
 
     @Id
-    @Column(name = "CDN_RESPONSAVEL")
+    @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_RESPONSAVEL")
     @SequenceGenerator(name = "SEQ_RESPONSAVEL", sequenceName = "SEQ_RESPONSAVEL", allocationSize = 1)
     private Long id;
 
-    @Column(name = "NOM_RESPONSAVEL", nullable = false)
+    @Column(name = "NOME", nullable = false)
     private String nome;
 
-    @Column(name = "NOM_EMAIL", nullable = false)
+    @Column(name = "EMAIL", nullable = false)
     private String email;
 
     @Column(name = "DT_NASCIMENTO", nullable = false)
